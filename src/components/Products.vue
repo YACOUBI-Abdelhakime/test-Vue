@@ -4,15 +4,18 @@
         <b-navbar type="dark" variant="dark">
           <b-navbar-nav>
             <div class="navleft">
-            <b-nav-item href="">Lœsus Pedagogia</b-nav-item>
+            <b-nav-item href="">LOGO</b-nav-item>
 
             <b-nav-item-dropdown text="Categories" right>
               <b-dropdown-item v-for="cat in this.categories" :key="cat" @click="seeCategory(cat)">{{cat}}</b-dropdown-item>
             </b-nav-item-dropdown>
             </div>
+            <div class="navcenter">
+              <h3>{{curentCat}}</h3>
+            </div>
             <b-nav-form class="navright">
-              <b-form-input class="input mr-sm-2" placeholder="Search"></b-form-input>
-              <b-button variant="outline-success" class="btnSearch my-2 my-sm-0" type="submit">Search</b-button>
+              <b-form-input id="input-search" class="input mr-sm-2" placeholder="Search"></b-form-input>
+              <b-button variant="outline-success" class="btnSearch my-sm-0" @click="search">Search</b-button>
             </b-nav-form>
           </b-navbar-nav>
         </b-navbar>
@@ -53,6 +56,7 @@ export default {
       prods : [],
       allProds : [],
       categories : [],
+      curentCat: "All Categories"
     }
   },
   mounted(){
@@ -68,7 +72,7 @@ export default {
   methods: {
     getCategories: function(list) {
       let res = 0 
-      this.categories.push("All categories")
+      this.categories.push("All Categories")
       for(let i = 0;i< list.length;i++){
         res = 1
         for(let j =0; j<this.categories.length ;j++){
@@ -83,13 +87,13 @@ export default {
       }
     },
     seeCategory: function(cat){
+          this.curentCat = cat
         if(cat == "All categories"){
           this.prods = this.allProds
           return
         }
-        let t = this.allProds.length
         this.prods = []
-        for(let j =0; j< t ;j++){
+        for(let j =0; j< this.allProds.length ;j++){
           if(this.allProds[j].category == cat ){
             this.prods.push(this.allProds[j])
           }
@@ -97,6 +101,16 @@ export default {
         // this.prods.push(this.allProds[0])
         // this.prods.push(this.allProds[1])
     },
+    search: function(){
+      let str = document.getElementById("input-search").value
+      let clonP = this.prods
+      this.prods = []
+      for(let j =0; j< clonP.length ;j++){
+          if(clonP[j].title.toLowerCase().includes(str.toLowerCase()) ){
+            this.prods.push(this.clonP[j])
+          }
+        }
+    }
   }
 };
 </script>
@@ -110,6 +124,11 @@ export default {
     width: 100%;
     z-index: 99;
     box-shadow: 0px 5px 8px rgb(56, 56, 56);
+}
+.nav-link{
+  font-size: 30;
+  font-weight: bold;
+  margin-left: 1rem;
 }
 .prod{
   margin-top: 0.5rem;
@@ -167,7 +186,10 @@ export default {
   align-content: center;
   flex-direction: row;
 }
-
+.input{
+  height: 2.5rem;
+  min-width: 12rem;
+}
 .btnSearch{
   margin-left: 0.5rem;
   margin-right: 1rem;
@@ -184,5 +206,20 @@ export default {
   justify-content: center;
   align-content: center;
   flex-direction: row;
+}
+.navcenter h3{
+  color: white;
+  font-size: 22px;
+  font-family: system-ui;
+  font-weight: 400;
+  text-decoration: underline;
+  margin-top: 5px;
+}
+@media screen and (max-width: 500px) {
+  .navbar-nav{
+    justify-content: flex-start;
+    align-content: center;
+    flex-direction: column !important;
+  }
 }
 </style>
