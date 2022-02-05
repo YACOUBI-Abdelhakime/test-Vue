@@ -222,4 +222,9 @@ export default {
     flex-direction: column !important;
   }
 }
+@media screen and (max-width: 700px) {
+  .navcenter{
+    display: none;
+  }
+}
 </style>

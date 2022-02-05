@@ -1,24 +1,24 @@
-# my-app
+# Test-VueJs
 
 ## Project setup
 ```
 npm install
 ```
-
 ### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
 ### Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Lints and fixes files
+## Tool versions
 ```
-npm run lint
+node    : 16.13.0
+npm     : 8.1.0
+vue/cli : 4.5.13
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Created by 
+```
+YACOUBI Abdelhakime
+```
